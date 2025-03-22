@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 // using JFrame for the window screen using Swing for Desktop Application
-public class Splash extends JFrame {
+public class Splash extends JFrame implements Runnable{
+    Thread t;
     public Splash() {
         // Storing Image in object(i1) using ImageIcon Class from System-Resoure to be loaded in JFrame,
         // Scaling img as req. and storing as image(i2)
@@ -14,18 +15,47 @@ public class Splash extends JFrame {
         JLabel image = new JLabel(i3);
         add(image);
 
+        t =new Thread(this);
+        t.start();
+
 // Setting JFrame configuration True bcz its always hidden,
 // Setting Location from X-axis & Y-axis,
 // Setting Size from where tobe Visible.
         setVisible(true);
-        for (int i = 0; i<=400; i++) {
-            setLocation(300,50);
-            setSize(2*i+110,2*i-60);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+        for (int i = 30; i<=450; i+=4) {
+            int newWidth = i * 2; // Grows both sides (left & right)
+            int newHeight = i + (i / 2); // Increase height normally
+            int newX = (screenWidth - newWidth) / 2; // Keep centered horizontally
+            int newY = (screenHeight - newHeight) / 2; // Keep centered vertically
+
+            setSize(newWidth, newHeight);
+            setLocation(newX, newY);
+
+            try{
+                Thread.sleep(10);
+            }catch (Exception e){
+        }
+    }}
+
+    // For closing the Frame for login
+    @Override
+    public void run(){
+        try {
+            Thread.sleep(7000);
+            setVisible(false);
+
+            //Next Frame i.e. Login frame.
+            new Login();
+        } catch (Exception e) {
+
         }
     }
 
 
     public static void main(String[] args) {
-        Splash s =new Splash();
+        new Splash();
     }
 }
