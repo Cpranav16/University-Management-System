@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Dashboard extends JFrame implements ActionListener {
 
@@ -76,23 +78,52 @@ public class Dashboard extends JFrame implements ActionListener {
         JMenu utility =  new JMenu("Utility");
         mb.add(utility);
         JMenuItem calc = new JMenuItem("Calculator");
+        calc.addActionListener(this);
         utility.add(calc);
         JMenuItem Notepd = new JMenuItem("Notepad");
+        Notepd.addActionListener(this);
         utility.add(Notepd);
 
 
         JMenu exit =  new JMenu("Exit");
         mb.add(exit);
         JMenuItem cl = new JMenuItem("Close");
-
+        cl.addActionListener(this);
         exit.add(cl);
         JMenuItem Signout = new JMenuItem("Sign Out");
+        Signout.addActionListener(this);
         exit.add(Signout);
 
         setJMenuBar(mb);
 
         setVisible(true);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String msg = e.getActionCommand();
+        if(msg.equals("Close")){
+            setVisible(false);
+        } else if (msg.equals("Calculator")) {
+            try {
+                Runtime.getRuntime().exec("calc");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else if (msg.equals("Notepad")) {
+            try {
+                Runtime.getRuntime().exec("notepad.exe");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+        else if (msg.equals("Sign Out")) {
+            setVisible(false);
+            new Login();
+        }
+    }
+
 
     public static void main(String[] args) {
         new Dashboard();
