@@ -1,10 +1,14 @@
+import jdk.jfr.consumer.RecordedStackTrace;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class Login extends JFrame implements ActionListener {
     JButton loginBtn,cancelBtn;
+    JTextField tfusername,tfpassword;
     Login (){
         getContentPane().setBackground(Color.white);
         setLayout(null);
@@ -15,7 +19,7 @@ public class Login extends JFrame implements ActionListener {
         lbusername.setFont(new Font("arial", Font.BOLD,15));
         add(lbusername);
 
-        JTextField tfusername = new JTextField();
+        tfusername = new JTextField();
         tfusername.setBounds(150,40,150,20);
         add(tfusername);
 
@@ -26,7 +30,7 @@ public class Login extends JFrame implements ActionListener {
         lbpassword.setFont(new Font("aria",Font.BOLD,15));
         add(lbpassword);
 
-        JPasswordField tfpassword = new JPasswordField();
+        tfpassword = new JPasswordField();
         tfpassword.setBounds(150,80,150,20);
         add(tfpassword);
 
@@ -70,7 +74,24 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==loginBtn) {}
+        if (e.getSource()==loginBtn) {
+            String username = tfusername.getText();
+            String password = tfpassword.getText();
+            //mysql query
+            String query1 = "select * from login where username = '"+username+"' and password = '"+password+"';";
+        }
+        try{
+            DBConnect db = new DBConnect();
+            ResultSet rs =  db.s.executeQuery(query1);
+            if (rs.next()){
+               setVisible(false);
+               new Dashboard();
+            }else{
+               JOptionPane.showMessageDialog(null,"Invalid Username or Password.");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         else if (e.getSource()==cancelBtn) {setVisible(false);}
     }
 }
