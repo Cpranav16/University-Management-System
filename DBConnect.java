@@ -1,9 +1,10 @@
 import java.sql.*;
 
 public class DBConnect {
+    public Connection connection;
+    public Statement s;
+
     public DBConnect() {
-    Connection connection;
-    Statement s;
 
     String url = "jdbc:mysql://localhost:3306/university";
     String user = "university";
@@ -19,7 +20,6 @@ public class DBConnect {
             // Creating Statement for executing mysql queries
             s = connection.createStatement();
      }
-     
     catch(Exception e){
           e.printStackTrace();
         }

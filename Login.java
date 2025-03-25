@@ -74,23 +74,24 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String query1;
         if (e.getSource()==loginBtn) {
             String username = tfusername.getText();
             String password = tfpassword.getText();
             //mysql query
-            String query1 = "select * from login where username = '"+username+"' and password = '"+password+"';";
+            query1 = "select * from login where username = '"+username+"' and password = '"+password+"';";
+            try{
+                DBConnect db = new DBConnect();
+                ResultSet rs =  db.s.executeQuery(query1);
+                if (rs.next()){
+                    setVisible(false);
+                    new Dashboard();
+                }else{
+                    JOptionPane.showMessageDialog(null,"Invalid Username or Password.");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
         }
-        try{
-            DBConnect db = new DBConnect();
-            ResultSet rs =  db.s.executeQuery(query1);
-            if (rs.next()){
-               setVisible(false);
-               new Dashboard();
-            }else{
-               JOptionPane.showMessageDialog(null,"Invalid Username or Password.");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
         else if (e.getSource()==cancelBtn) {setVisible(false);}
     }
