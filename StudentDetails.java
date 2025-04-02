@@ -1,8 +1,15 @@
-import org.w3c.dom.ls.LSOutput;
+import javax.swing.*;
 
-public class StudentDetails {
+public class StudentDetails extends JFrame {
+
+    StudentDetails(){
+        setSize(850,750);
+        setLocation(300,37);
+        setVisible(true);
+    }
+
     public static void main (String[] args){
-        System.out.println();
+    new StudentDetails();
     }
 
 }
