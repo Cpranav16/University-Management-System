@@ -26,7 +26,7 @@ public class StudentDetails extends JFrame {
 
 
         // RollNo Label
-        lb_rno = new JLabel("Name");
+        lb_rno = new JLabel("Roll No.");
         lb_rno.setBounds(50,180,150,30);
         lb_rno.setFont(new Font("arial", Font.BOLD,15));
         add(lb_rno);
@@ -37,7 +37,7 @@ public class StudentDetails extends JFrame {
 
 
         // Address Label
-        lb_address = new JLabel("Name");
+        lb_address = new JLabel("Address");
         lb_address.setBounds(50,270,150,30);
         lb_address.setFont(new Font("arial", Font.BOLD,15));
         add(lb_address);
@@ -48,7 +48,7 @@ public class StudentDetails extends JFrame {
 
 
         // Email Label
-        lb_email = new JLabel("Name");
+        lb_email = new JLabel("Email ID");
         lb_email.setBounds(50,360,150,30);
         lb_email.setFont(new Font("arial", Font.BOLD,15));
         add(lb_email);
@@ -59,7 +59,7 @@ public class StudentDetails extends JFrame {
 
 
         // Class XII Label
-        lb_classxii = new JLabel("Name");
+        lb_classxii = new JLabel("Class XII");
         lb_classxii.setBounds(50,450,150,30);
         lb_classxii.setFont(new Font("arial", Font.BOLD,15));
         add(lb_classxii);
@@ -70,7 +70,7 @@ public class StudentDetails extends JFrame {
 
 
         // Course Name Label
-        lb_course = new JLabel("Name");
+        lb_course = new JLabel("Course");
         lb_course.setBounds(50,540,150,30);
         lb_course.setFont(new Font("arial", Font.BOLD,15));
         add(lb_course);
@@ -81,12 +81,13 @@ public class StudentDetails extends JFrame {
 
 
         // Father Name Label
-        lb_fathername = new JLabel("Name");
+        lb_fathername = new JLabel("Father");
         lb_fathername.setBounds(420,90,150,30);
         lb_fathername.setFont(new Font("arial", Font.BOLD,15));
         add(lb_fathername);
 
         tf_fathername = new JTextField();
+        tf_fathername.setToolTipText("Father Name");
         tf_fathername.setBounds(550,90,170,30);
         add(tf_fathername);
 //
